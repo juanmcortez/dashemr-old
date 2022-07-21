@@ -24,7 +24,7 @@ class DemographicFactory extends Factory
             'firstName'             => fake()->firstName($genre),
             'middleName'            => fake()->firstName($genre),
             'lastName'              => fake()->lastName(),
-            'dateOfBirth'           => fake()->dateTimeBetween('-80 years', 'now'),
+            'dateOfBirth'           => fake()->dateTimeBetween('-80 years', '-2 years'),
             'genre'                 => $genre,
             'socialSecurityNumber'  => fake()->unique()->randomNumber(9),
             'driverLicenseNumber'   => fake()->unique()->randomNumber(9),
