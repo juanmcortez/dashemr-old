@@ -130,7 +130,7 @@ class Demographic extends Model
      *
      * @return void
      */
-    public function patient()
+    public function patientInfo()
     {
         return $this->hasOne(Patient::class, 'pid', 'pid');
     }

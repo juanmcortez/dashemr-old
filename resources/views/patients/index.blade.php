@@ -9,9 +9,44 @@
 </head>
 
 <body class="antialiased">
-    @foreach($patients AS $patient)
-    {{ $patient }}
-    @endforeach
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th align="left">Name</th>
+                <th>&nbsp;</th>
+                <th align="center">Age</th>
+                <th>&nbsp;</th>
+                <th align="center">Phone</th>
+                <th>&nbsp;</th>
+                <th align="center">S.S.N.</th>
+                <th>&nbsp;</th>
+                <th align="center">PID</th>
+                <th>&nbsp;</th>
+                <th align="center">External PID</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($patients AS $patient)
+            <tr>
+                <th>&nbsp;</th>
+                <td>{{ $patient->full_name }}</td>
+                <td>&nbsp;</td>
+                <td align="center">{{ $patient->age }}</td>
+                <td>&nbsp;</td>
+                <td align="center">{{ $patient->homePhone }}</td>
+                <td>&nbsp;</td>
+                <td align="center">{{ $patient->socialSecurityNumber }}</td>
+                <td>&nbsp;</td>
+                <td align="center">{{ $patient->patientInfo->pid }}</td>
+                <td>&nbsp;</td>
+                <td align="center">{{ $patient->patientInfo->externalPid }}</td>
+                <th>&nbsp;</th>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 
 </html>
