@@ -17,7 +17,7 @@ class PatientFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'externalPid' => random_int(1000, 9999999),
         ];
     }
 }
