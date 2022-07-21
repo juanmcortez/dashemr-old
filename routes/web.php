@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Patients\PatientController;
+use App\Http\Controllers\Patients\DemographicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +14,4 @@ use App\Http\Controllers\Patients\PatientController;
 |
 */
 
-Route::get('/', [PatientController::class, 'index']);
+Route::get('/', [DemographicController::class, 'index']);

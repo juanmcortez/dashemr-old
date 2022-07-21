@@ -16,7 +16,8 @@ class DemographicController extends Controller
      */
     public function index()
     {
-        //
+        $patients = Demographic::all();
+        return view('patients.index', compact('patients'));
     }
 
     /**

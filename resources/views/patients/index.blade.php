@@ -9,7 +9,9 @@
 </head>
 
 <body class="antialiased">
-    HOME
+    @foreach($patients AS $patient)
+    {{ $patient }}
+    @endforeach
 </body>
 
 </html>
