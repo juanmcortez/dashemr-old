@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Patients\Demographic;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Patients\DemographicController;
 
 /*
