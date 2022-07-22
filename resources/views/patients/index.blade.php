@@ -25,12 +25,14 @@
                 <th>&nbsp;</th>
                 <th align="center">External PID</th>
                 <th>&nbsp;</th>
+                <th align="center">&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
             @foreach($patients AS $patient)
             <tr>
-                <th>&nbsp;</th>
+                <td>&nbsp;</td>
                 <td>{{ $patient->full_name }}</td>
                 <td>&nbsp;</td>
                 <td align="center">{{ $patient->age }}</td>
@@ -42,10 +44,19 @@
                 <td align="center">{{ $patient->patientInfo->pid }}</td>
                 <td>&nbsp;</td>
                 <td align="center">{{ $patient->patientInfo->externalPid }}</td>
+                <td>&nbsp;</td>
+                <th align="center">
+                    <a href="{{ route('patients.show', ['demographic' => $patient->patientInfo->pid]) }}">View</a>
+                </th>
                 <th>&nbsp;</th>
             </tr>
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="15">{{ $patients->links() }}</td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 

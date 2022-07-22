@@ -60,6 +60,7 @@ class Demographic extends Model
      */
     protected $hidden = [
         'pid',
+        'patientInfo',
         'created_at',
         'updated_at',
         'deleted_at',
