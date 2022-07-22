@@ -52,7 +52,7 @@ class DemographicController extends Controller
      */
     public function show(Demographic $demographic)
     {
-        return view('patients.show', compact('demographic'));
+        //
     }
 
     /**

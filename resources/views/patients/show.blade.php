@@ -9,9 +9,9 @@
 </head>
 
 <body class="antialiased">
-    {{ $demographic->patientInfo }}
+    {{ $patient}}
     <br /><br />
-    {{ $demographic }}
+    {{ $patient->demographic }}
 </body>
 
 </html>

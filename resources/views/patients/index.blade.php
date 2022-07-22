@@ -46,7 +46,7 @@
                 <td align="center">{{ $patient->patientInfo->externalPid }}</td>
                 <td>&nbsp;</td>
                 <th align="center">
-                    <a href="{{ route('patients.show', ['demographic' => $patient->patientInfo->pid]) }}">View</a>
+                    <a href="{{ route('patients.show', ['patient' => $patient->patientInfo->pid]) }}">View</a>
                 </th>
                 <th>&nbsp;</th>
             </tr>
