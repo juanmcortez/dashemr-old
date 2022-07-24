@@ -25,6 +25,8 @@
                 <th>&nbsp;</th>
                 <th align="center">External PID</th>
                 <th>&nbsp;</th>
+                <th align="center">Last Srv Date</th>
+                <th>&nbsp;</th>
                 <th align="center">&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
@@ -44,6 +46,8 @@
                 <td align="center">{{ $patient->patientInfo->pid }}</td>
                 <td>&nbsp;</td>
                 <td align="center">{{ $patient->patientInfo->externalPid }}</td>
+                <td>&nbsp;</td>
+                <td align="center">{{ $patient->patientInfo->lastServiceDate() }}</td>
                 <td>&nbsp;</td>
                 <th align="center">
                     <a href="{{ route('patients.show', ['patient' => $patient->patientInfo->pid]) }}">View</a>

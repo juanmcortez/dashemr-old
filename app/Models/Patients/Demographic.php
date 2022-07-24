@@ -133,6 +133,6 @@ class Demographic extends Model
      */
     public function patientInfo()
     {
-        return $this->hasOne(Patient::class, 'pid', 'pid');
+        return $this->belongsTo(Patient::class, 'pid', 'pid');
     }
 }
