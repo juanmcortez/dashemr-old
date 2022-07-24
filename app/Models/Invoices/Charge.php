@@ -2,23 +2,14 @@
 
 namespace App\Models\Invoices;
 
-use App\Models\Invoices\Charge;
-use App\Models\Patients\Patient;
+use App\Models\Invoices\Encounter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Encounter extends Model
+class Charge extends Model
 {
     use HasFactory, SoftDeletes;
-
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
 
 
     /**
@@ -26,7 +17,7 @@ class Encounter extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'encounter';
+    protected $primaryKey = 'chargeID';
 
 
     /**
@@ -35,9 +26,24 @@ class Encounter extends Model
      * @var array
      */
     protected $fillable = [
-        'pid',
-        'entryDate',
-        'serviceDate',
+        'encounter',
+        'codeType',
+        'code',
+        'codeText',
+        'fee',
+        'copay',
+        'units',
+        'NDCvalue',
+        'NDCquantity',
+        'NDCtype',
+        'modifier',
+        'noteCodes',
+        'custom1',
+        'custom2',
+        'custom3',
+        'custom4',
+        'custom5',
+        'ICDitems',
     ];
 
 
@@ -47,7 +53,8 @@ class Encounter extends Model
      * @var array
      */
     protected $hidden = [
-        'pid',
+        'encounter',
+        'created_at',
         'updated_at',
         'deleted_at',
     ];
@@ -59,29 +66,17 @@ class Encounter extends Model
      * @var array
      */
     protected $casts = [
-        'entryDate'    => 'datetime:M d, Y',
-        'serviceDate'  => 'datetime:M d, Y'
+        'created_at' => 'datetime:M d, Y',
     ];
 
 
     /**
-     * Get patient information associated to invoice
+     * Get encounter information associated to charge
      *
      * @return void
      */
-    public function patientInfo()
+    public function encounterInfo()
     {
-        return $this->belongsTo(Patient::class, 'pid', 'pid');
-    }
-
-
-    /**
-     * Get charges information associated to encounter
-     *
-     * @return void
-     */
-    public function chargesList()
-    {
-        return $this->hasMany(Charge::class, 'encounter', 'encounter');
+        return $this->belongsTo(Encounter::class, 'encounter', 'encounter');
     }
 }

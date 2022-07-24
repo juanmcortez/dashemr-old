@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Invoices\Charge;
 use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
@@ -34,19 +35,25 @@ class DatabaseSeeder extends Seeder
                         'updated_at'    => $randomCreatedDate,
                     ]);
 
-                // For each patient create a random number of invoices
-                $randomInvoices = rand(1, 22);
+                // For each patient create a random number of encounter
+                $randomEncounters = rand(1, 22);
                 Encounter::factory()
-                    ->count($randomInvoices)
+                    ->count($randomEncounters)
                     ->create([
-                        'pid'           => $patient->pid,
+                        'pid' => $patient->pid,
                     ])
                     ->each(function ($invoice) {
-                        $randomInvoiceCreateDate = fake()->dateTimeBetween('-3 years', 'now');
-                        $invoice->entryDate = $randomInvoiceCreateDate;
-                        $randomInvoiceCreateDate = fake()->dateTimeBetween('-3 years', 'now');
-                        $invoice->serviceDate = $randomInvoiceCreateDate;
+                        $randomencounterCreateDate = fake()->dateTimeBetween('-3 years', 'now');
+                        $invoice->entryDate = $randomencounterCreateDate;
+                        $randomencounterCreateDate = fake()->dateTimeBetween('-3 years', 'now');
+                        $invoice->serviceDate = $randomencounterCreateDate;
                         $invoice->update();
+
+                        // For each encounter create a random number of charges
+                        $randomCharges = rand(1, 12);
+                        Charge::factory()
+                            ->count($randomCharges)
+                            ->create(['encounter' => $invoice->encounter]);
                     });
             });
     }
