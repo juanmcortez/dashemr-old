@@ -2,7 +2,7 @@
 
 namespace App\Models\Patients;
 
-use App\Models\Patients\Invoice;
+use App\Models\Invoices\Encounter;
 use App\Models\Patients\Demographic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -70,7 +70,7 @@ class Patient extends Model
      */
     public function invoiceList()
     {
-        return $this->hasMany(Invoice::class, 'pid', 'pid')->orderBy('encounter', 'desc');
+        return $this->hasMany(Encounter::class, 'pid', 'pid')->orderBy('encounter', 'desc');
     }
 
 
@@ -81,7 +81,7 @@ class Patient extends Model
      */
     public function lastServiceDate()
     {
-        return Invoice::where('pid', $this->pid)
+        return Encounter::where('pid', $this->pid)
             ->orderBy('serviceDate', 'desc')
             ->first()
             ->serviceDate

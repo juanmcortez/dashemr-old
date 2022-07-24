@@ -5,8 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
-use App\Models\Patients\Invoice;
 use App\Models\Patients\Patient;
+use App\Models\Invoices\Encounter;
 use App\Models\Patients\Demographic;
 
 class DatabaseSeeder extends Seeder
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
 
                 // For each patient create a random number of invoices
                 $randomInvoices = rand(1, 22);
-                Invoice::factory()
+                Encounter::factory()
                     ->count($randomInvoices)
                     ->create([
                         'pid'           => $patient->pid,
