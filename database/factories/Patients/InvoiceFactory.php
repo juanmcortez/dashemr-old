@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Patients;
 
+use App\Models\Patients\Patient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'pid' => Patient::class,
         ];
     }
 }

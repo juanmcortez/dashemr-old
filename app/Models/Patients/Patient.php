@@ -2,6 +2,7 @@
 
 namespace App\Models\Patients;
 
+use App\Models\Patients\Invoice;
 use App\Models\Patients\Demographic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -59,5 +60,31 @@ class Patient extends Model
     public function demographic()
     {
         return $this->hasOne(Demographic::class, 'pid', 'pid');
+    }
+
+
+    /**
+     * Get invoices information associated to patient
+     *
+     * @return void
+     */
+    public function invoiceList()
+    {
+        return $this->hasMany(Invoice::class, 'pid', 'pid')->orderBy('encounter', 'desc');
+    }
+
+
+    /**
+     * Get invoices information associated to patient
+     *
+     * @return date
+     */
+    public function lastServiceDate()
+    {
+        return Invoice::where('pid', $this->pid)
+            ->orderBy('serviceDate', 'desc')
+            ->first()
+            ->serviceDate
+            ->format('M d, Y');
     }
 }

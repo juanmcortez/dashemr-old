@@ -12,6 +12,10 @@
     {{ $patient}}
     <br /><br />
     {{ $patient->demographic }}
+    @foreach ($patient->invoiceList as $invoice)
+    <br /><br />
+    {{ $invoice }}
+    @endforeach
 </body>
 
 </html>
