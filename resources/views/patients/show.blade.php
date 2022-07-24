@@ -76,7 +76,8 @@
                     {{ $invoice->entryDate->format('M d, Y') }}
                 </td>
                 <td>
-                    <a href="{{ route('encounter.show', ['encounter' => $invoice->encounter]) }}">
+                    <a
+                        href="{{ route('encounter.show', ['patient' => $patient->pid, 'encounter' => $invoice->encounter]) }}">
                         View
                     </a>
                 </td>

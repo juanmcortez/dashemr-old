@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Invoices;
 
+use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\StoreEncounterRequest;
@@ -43,10 +44,11 @@ class EncounterController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\Patients\Patient  $patient
      * @param  \App\Models\Invoices\Encounter  $encounter
      * @return \Illuminate\Http\Response
      */
-    public function show(Encounter $encounter)
+    public function show(Patient $patient, Encounter $encounter)
     {
         return view('encounters.show', compact('encounter'));
     }
