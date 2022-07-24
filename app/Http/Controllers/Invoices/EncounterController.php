@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Invoices;
 
-use App\Models\Invoice\Encounter;
+use App\Models\Invoices\Encounter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\StoreEncounterRequest;
 use App\Http\Requests\Invoices\UpdateEncounterRequest;
@@ -43,18 +43,18 @@ class EncounterController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Invoice\Encounter  $encounter
+     * @param  \App\Models\Invoices\Encounter  $encounter
      * @return \Illuminate\Http\Response
      */
     public function show(Encounter $encounter)
     {
-        //
+        return view('encounters.show', compact('encounter'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Invoice\Encounter  $encounter
+     * @param  \App\Models\Invoices\Encounter  $encounter
      * @return \Illuminate\Http\Response
      */
     public function edit(Encounter $encounter)
@@ -66,7 +66,7 @@ class EncounterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Invoices\UpdateEncounterRequest  $request
-     * @param  \App\Models\Invoice\Encounter  $encounter
+     * @param  \App\Models\Invoices\Encounter  $encounter
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateEncounterRequest $request, Encounter $encounter)
@@ -77,7 +77,7 @@ class EncounterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Invoice\Encounter  $encounter
+     * @param  \App\Models\Invoices\Encounter  $encounter
      * @return \Illuminate\Http\Response
      */
     public function destroy(Encounter $encounter)

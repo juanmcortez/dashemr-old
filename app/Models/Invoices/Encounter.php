@@ -131,4 +131,11 @@ class Encounter extends Model
     {
         return $this->hasMany(Charge::class, 'encounter', 'encounter');
     }
+
+
+
+    public function getTotalChargesAttribute()
+    {
+        return count($this->chargesList);
+    }
 }
