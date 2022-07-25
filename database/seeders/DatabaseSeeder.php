@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $patientData = DB::connection('PGMdatabase')->select('SELECT * FROM patient_data');
+        $patientData = DB::connection('OriginalDatabase')->select('SELECT * FROM patient_data');
         foreach ($patientData as $patientInfo) {
             Patient::factory()
                 ->create([
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
                     'updated_at'            => $patientInfo->date,
                 ]);
 
-            $encounterData = DB::connection('PGMdatabase')
+            $encounterData = DB::connection('OriginalDatabase')
                 ->select('SELECT * FROM form_encounter WHERE pid = :pid', ['pid' => $patientInfo->pid]);
 
             foreach ($encounterData as $encounterInfo) {
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
                 $encounterInfo->onset_date = ($encounterInfo->onset_date == '0000-00-00 00:00:00') ? null : $encounterInfo->onset_date;
                 $encounterInfo->discharge_date = ($encounterInfo->discharge_date == '0000-00-00') ? null : $encounterInfo->discharge_date;
 
-                $extraFields = DB::connection('PGMdatabase')
+                $extraFields = DB::connection('OriginalDatabase')
                     ->select(
                         'SELECT * FROM metadata_fields_values WHERE pid = :pid AND encounter = :enc ORDER BY id_tab, id_field',
                         ['pid' => $patientInfo->pid, 'enc' => $encounterInfo->encounter]
@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
                     }
                 }
 
-                $chargesData = DB::connection('PGMdatabase')
+                $chargesData = DB::connection('OriginalDatabase')
                     ->select(
                         'SELECT * FROM billing WHERE pid = :pid AND encounter = :enc AND code_type NOT IN ("ICD9", "ICD10")',
                         ['pid' => $patientInfo->pid, 'enc' => $encounterInfo->encounter]
