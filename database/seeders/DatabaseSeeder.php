@@ -20,48 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*$randomCreatedDate = fake()->dateTimeBetween('-5 years', 'now');
-        $randomPatients = rand(2500, 9800);
-        Patient::factory($randomPatients)
-            ->create([
-                'created_at' => $randomCreatedDate,
-                'updated_at' => $randomCreatedDate,
-            ])
-            ->each(function ($patient) use ($randomCreatedDate) {
-                // For each patient create 1 demographic
-                Demographic::factory()
-                    ->create([
-                        'pid'           => $patient->pid,
-                        'created_at'    => $randomCreatedDate,
-                        'updated_at'    => $randomCreatedDate,
-                    ]);
-
-                // For each patient create a random number of encounter
-                $randomEncounters = rand(1, 22);
-                Encounter::factory()
-                    ->count($randomEncounters)
-                    ->create([
-                        'pid' => $patient->pid,
-                    ])
-                    ->each(function ($invoice) {
-                        $randomencounterCreateDate = fake()->dateTimeBetween('-3 years', 'now');
-                        $invoice->entryDate = $randomencounterCreateDate;
-                        $randomencounterCreateDate = fake()->dateTimeBetween('-3 years', 'now');
-                        $invoice->serviceDate = $randomencounterCreateDate;
-                        $invoice->update();
-
-                        // For each encounter create a random number of charges
-                        $randomCharges = rand(1, 12);
-                        Charge::factory()
-                            ->count($randomCharges)
-                            ->create(['encounter' => $invoice->encounter]);
-                    });
-            });*/
-
-        // $users = DB::connection('mysql2')->select('SELECT * FROM patient_data WHERE id = :id', ['id' => 1]);
-        /*$users = DB::connection('mysql2')->select('SELECT COUNT(*) FROM patient_data');
-        var_dump($users);*/
-
         $patientData = DB::connection('PGMdatabase')->select('SELECT * FROM patient_data');
         foreach ($patientData as $patientInfo) {
             Patient::factory()
