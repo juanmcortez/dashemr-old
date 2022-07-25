@@ -81,10 +81,13 @@ class Patient extends Model
      */
     public function lastServiceDate()
     {
-        return Encounter::where('pid', $this->pid)
+        $lastServiceDate = Encounter::where('pid', $this->pid)
             ->orderBy('serviceDate', 'desc')
-            ->first()
-            ->serviceDate
-            ->format('M d, Y');
+            ->first();
+        if ($lastServiceDate) {
+            return $lastServiceDate->serviceDate->format('M d, Y');
+        } else {
+            return null;
+        }
     }
 }
