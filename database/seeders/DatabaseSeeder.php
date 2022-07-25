@@ -9,7 +9,6 @@ use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Continue_;
 use App\Models\Patients\Demographic;
 
 class DatabaseSeeder extends Seeder
@@ -132,10 +131,14 @@ class DatabaseSeeder extends Seeder
                             break;
                     }
                     for ($field = 1; $field <= $maxfield; $field++) {
-                        $extraData[$tab][$field] = (empty($extraFields['field_value'])) ? null : $extraFields['field_value'];
+                        $extraData[$tab][$field] = null;
+                        foreach ($extraFields as $fieldItems) {
+                            if ($fieldItems->id_tab == $tab && $fieldItems->id_field == $field) {
+                                $extraData[$tab][$field] = (empty($fieldItems->field_value)) ? null : $fieldItems->field_value;
+                            }
+                        }
                     }
                 }
-
 
                 $chargesData = DB::connection('PGMdatabase')
                     ->select(
@@ -160,16 +163,16 @@ class DatabaseSeeder extends Seeder
                         'referringProviderID'           => $encounterInfo->provider_id,
                         'orderingProviderID'            => $encounterInfo->ordering_physician_id,
                         'supervisingProviderID'         => $encounterInfo->supervising_physician_id,
-                        'consult'                       => null,
+                        'consult'                       => $encounterInfo->reason,
                         'authorizationNumberID'         => $encounterInfo->authorization_id,
-                        'conditionOriginatedDate'       => $extraData[1][1],
-                        'firstConsultedDate'            => $extraData[1][2],
-                        'lastSeenDate'                  => $extraData[1][2],
-                        'acuteManifestationDate'        => $extraData[1][4],
-                        'lastXRayDate'                  => $extraData[1][5],
+                        'conditionOriginatedDate'       => (empty($extraData[1][1])) ? null : date('Y-m-d', strtotime($extraData[1][1])),
+                        'firstConsultedDate'            => (empty($extraData[1][2])) ? null : date('Y-m-d', strtotime($extraData[1][2])),
+                        'lastSeenDate'                  => (empty($extraData[1][3])) ? null : date('Y-m-d', strtotime($extraData[1][3])),
+                        'acuteManifestationDate'        => (empty($extraData[1][4])) ? null : date('Y-m-d', strtotime($extraData[1][4])),
+                        'lastXRayDate'                  => (empty($extraData[1][5])) ? null : date('Y-m-d', strtotime($extraData[1][5])),
                         'illnessAccidentPregnancy'      => $extraData[1][6],
                         'autoAccidentState'             => $extraData[1][7],
-                        'accidentDate'                  => $extraData[1][8],
+                        'accidentDate'                  => (empty($extraData[1][8])) ? null : date('Y-m-d', strtotime($extraData[1][8])),
                         'employmentRelated'             => (empty($extraData[1][9]) || $extraData[1][9] == 'off') ? false : true,
                         'mammographyCertificateNumber'  => $extraData[2][1],
                         'claimReason'                   => $extraData[2][2],
@@ -198,7 +201,6 @@ class DatabaseSeeder extends Seeder
                     ]);
 
                 foreach ($chargesData as $chargesInfo) {
-
                     Charge::factory()
                         ->create([
                             'encounter'     => $chargesInfo->encounter,
