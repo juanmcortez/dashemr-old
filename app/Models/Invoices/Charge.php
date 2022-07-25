@@ -33,17 +33,28 @@ class Charge extends Model
         'fee',
         'copay',
         'units',
+        'modifier',
+        'ICDitems',
         'NDCvalue',
         'NDCquantity',
         'NDCtype',
-        'modifier',
+        'anesthesiaStartTime',
+        'anesthesiaStopTime',
+        'anesthesiaLapseTime',
+        'anesthesiaTimeUnits',
+        'anesthesiaBaseUnits',
+        'anesthesiaUnitCharge',
+        'anesthesiaM1',
+        'anesthesiaM2',
+        'anesthesiaInfusion',
+        'anesthesiaBasicValue',
+        'anesthesiaModifierUnits',
         'noteCodes',
         'custom1',
         'custom2',
         'custom3',
         'custom4',
         'custom5',
-        'ICDitems',
     ];
 
 
@@ -66,7 +77,10 @@ class Charge extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime:M d, Y',
+        'created_at'            => 'datetime:M d, Y',
+        'anesthesiaStartTime'   => 'datetime: H:i',
+        'anesthesiaStopTime'    => 'datetime: H:i',
+        'anesthesiaLapseTime'   => 'datetime: H:i',
     ];
 
 

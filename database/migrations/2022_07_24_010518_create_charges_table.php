@@ -23,16 +23,28 @@ return new class extends Migration
             $table->string('code', 8)->default('99213');
             $table->string('codeText', 128)->nullable();
 
-            $table->float('fee')->default(0);
-            $table->float('copay')->default(0);
+            $table->float('fee', 8, 2)->default(0);
+            $table->float('copay', 8, 2)->default(0);
             $table->integer('units')->default(1);
+
+            $table->string('modifier', 64)->nullable();
+            $table->string('ICDitems', 128)->nullable();
 
             $table->string('NDCvalue', 13)->nullable();
             $table->integer('NDCquantity')->nullable();
             $table->enum('NDCtype', ['ML', 'Grams', 'Miligrams', 'I.U.', 'Units'])->default('ML');
 
-            $table->string('modifier', 64)->nullable();
-            $table->string('ICDitems', 128)->nullable();
+            $table->timestamp('anesthesiaStartTime')->nullable();
+            $table->timestamp('anesthesiaStopTime')->nullable();
+            $table->timestamp('anesthesiaLapseTime')->nullable();
+            $table->integer('anesthesiaTimeUnits')->default(0)->nullable();
+            $table->integer('anesthesiaBaseUnits')->default(0)->nullable();
+            $table->float('anesthesiaUnitCharge', 8, 2)->default(0)->nullable();
+            $table->string('anesthesiaM1')->nullable();
+            $table->string('anesthesiaM2')->nullable();
+            $table->string('anesthesiaInfusion')->nullable();
+            $table->float('anesthesiaBasicValue', 8, 2)->default(0)->nullable();
+            $table->integer('anesthesiaModifierUnits')->default(0)->nullable();
 
             $table->text('noteCodes')->nullable();
             $table->string('custom1', 64)->nullable();

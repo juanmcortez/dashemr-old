@@ -142,7 +142,7 @@ class DatabaseSeeder extends Seeder
 
                 $chargesData = DB::connection('PGMdatabase')
                     ->select(
-                        'SELECT * FROM billing WHERE pid = :pid AND encounter = :enc AND code_type NOT IN ("ICD9", "ICD10") AND activity = 1',
+                        'SELECT * FROM billing WHERE pid = :pid AND encounter = :enc AND code_type NOT IN ("ICD9", "ICD10")',
                         ['pid' => $patientInfo->pid, 'enc' => $encounterInfo->encounter]
                     );
 
@@ -201,26 +201,43 @@ class DatabaseSeeder extends Seeder
                     ]);
 
                 foreach ($chargesData as $chargesInfo) {
+                    $chargesInfo->anesthesia_start_time = ($chargesInfo->anesthesia_start_time == '00:00:00') ? null : $chargesInfo->anesthesia_start_time;
+                    $chargesInfo->anesthesia_stop_time = ($chargesInfo->anesthesia_stop_time == '00:00:00') ? null : $chargesInfo->anesthesia_stop_time;
+                    $chargesInfo->anesthesia_lapse_time = ($chargesInfo->anesthesia_lapse_time == 0) ? null : $chargesInfo->anesthesia_lapse_time;
                     Charge::factory()
                         ->create([
-                            'encounter'     => $chargesInfo->encounter,
-                            'codeType'      => $chargesInfo->code_type,
-                            'code'          => $chargesInfo->code,
-                            'codeText'      => $chargesInfo->code_desc_837,
-                            'fee'           => $chargesInfo->fee,
-                            'copay'         => 0,
-                            'units'         => $chargesInfo->units,
-                            'NDCvalue'      => $chargesInfo->ndc_info,
-                            'NDCquantity'   => null,
-                            'NDCtype'       => 'ML',
-                            'modifier'      => $chargesInfo->modifier,
-                            'noteCodes'     => $chargesInfo->notecodes,
-                            'custom1'       => $chargesInfo->custom1,
-                            'custom2'       => $chargesInfo->custom2,
-                            'custom3'       => $chargesInfo->custom3,
-                            'custom4'       => $chargesInfo->custom4,
-                            'custom5'       => $chargesInfo->custom5,
-                            'ICDitems'      => $chargesInfo->justify,
+                            'encounter'                 => $chargesInfo->encounter,
+                            'codeType'                  => $chargesInfo->code_type,
+                            'code'                      => $chargesInfo->code,
+                            'codeText'                  => $chargesInfo->code_desc_837,
+                            'fee'                       => $chargesInfo->fee,
+                            'copay'                     => 0,
+                            'units'                     => $chargesInfo->units,
+                            'modifier'                  => $chargesInfo->modifier,
+                            'ICDitems'                  => $chargesInfo->justify,
+                            'NDCvalue'                  => $chargesInfo->ndc_info,
+                            'NDCquantity'               => null,
+                            'NDCtype'                   => 'ML',
+                            'anesthesiaStartTime'       => $chargesInfo->anesthesia_start_time,
+                            'anesthesiaStopTime'        => $chargesInfo->anesthesia_stop_time,
+                            'anesthesiaLapseTime'       => $chargesInfo->anesthesia_lapse_time,
+                            'anesthesiaTimeUnits'       => $chargesInfo->anesthesia_time_units,
+                            'anesthesiaBaseUnits'       => $chargesInfo->anesthesia_base_units,
+                            'anesthesiaUnitCharge'      => $chargesInfo->anesthesia_unit_charge,
+                            'anesthesiaM1'              => $chargesInfo->anesthesia_m1select,
+                            'anesthesiaM2'              => $chargesInfo->anesthesia_m2select,
+                            'anesthesiaInfusion'        => $chargesInfo->anesthesia_infusion,
+                            'anesthesiaBasicValue'      => $chargesInfo->anesthesia_basic_value,
+                            'anesthesiaModifierUnits'   => $chargesInfo->anesthesia_mods_units,
+                            'noteCodes'                 => $chargesInfo->notecodes,
+                            'custom1'                   => $chargesInfo->custom1,
+                            'custom2'                   => $chargesInfo->custom2,
+                            'custom3'                   => $chargesInfo->custom3,
+                            'custom4'                   => $chargesInfo->custom4,
+                            'custom5'                   => $chargesInfo->custom5,
+                            'created_at'                => $chargesInfo->date,
+                            'updated_at'                => $chargesInfo->updated_at,
+                            'deleted_at'                => ($chargesInfo->activity) ? null : $chargesInfo->updated_at,
                         ]);
                 }
             }
