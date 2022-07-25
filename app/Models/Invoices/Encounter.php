@@ -75,7 +75,15 @@ class Encounter extends Model
         'referralGiven',
         'condition1',
         'condition2',
-        'condition2',
+        'condition3',
+        'accessionNumberLabLevel',
+        'salesRepresentative',
+        'locationCode',
+        'locationName',
+        'labUserDefined',
+        'referenceLab',
+        'panelName',
+        'labTestType'
     ];
 
 
@@ -108,6 +116,9 @@ class Encounter extends Model
         'acuteManifestationDate'    => 'datetime:M d, Y',
         'lastXRayDate'              => 'datetime:M d, Y',
         'accidentDate'              => 'datetime:M d, Y',
+        'employmentRelated'         => 'boolean',
+        'medicaidServicesEP'        => 'boolean',
+        'referralGiven'             => 'boolean',
     ];
 
 

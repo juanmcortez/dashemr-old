@@ -112,6 +112,31 @@ class DatabaseSeeder extends Seeder
                 $encounterInfo->onset_date = ($encounterInfo->onset_date == '0000-00-00 00:00:00') ? null : $encounterInfo->onset_date;
                 $encounterInfo->discharge_date = ($encounterInfo->discharge_date == '0000-00-00') ? null : $encounterInfo->discharge_date;
 
+                $extraFields = DB::connection('PGMdatabase')
+                    ->select(
+                        'SELECT * FROM metadata_fields_values WHERE pid = :pid AND encounter = :enc ORDER BY id_tab, id_field',
+                        ['pid' => $patientInfo->pid, 'enc' => $encounterInfo->encounter]
+                    );
+
+                for ($tab = 1; $tab <= 4; $tab++) {
+                    switch ($tab) {
+                        case 1:
+                        default:
+                            $maxfield = 9;
+                            break;
+                        case 2:
+                            $maxfield = 17;
+                            break;
+                        case 3:
+                            $maxfield = 8;
+                            break;
+                    }
+                    for ($field = 1; $field <= $maxfield; $field++) {
+                        $extraData[$tab][$field] = (empty($extraFields['field_value'])) ? null : $extraFields['field_value'];
+                    }
+                }
+
+
                 $chargesData = DB::connection('PGMdatabase')
                     ->select(
                         'SELECT * FROM billing WHERE pid = :pid AND encounter = :enc AND code_type NOT IN ("ICD9", "ICD10") AND activity = 1',
@@ -137,31 +162,39 @@ class DatabaseSeeder extends Seeder
                         'supervisingProviderID'         => $encounterInfo->supervising_physician_id,
                         'consult'                       => null,
                         'authorizationNumberID'         => $encounterInfo->authorization_id,
-                        'conditionOriginatedDate'       => null,
-                        'firstConsultedDate'            => null,
-                        'lastSeenDate'                  => null,
-                        'acuteManifestationDate'        => null,
-                        'lastXRayDate'                  => null,
-                        'illnessAccidentPregnancy'      => null,
-                        'autoAccidentState'             => null,
-                        'accidentDate'                  => null,
-                        'employmentRelated'             => false,
-                        'mammographyCertificateNumber'  => null,
-                        'claimReason'                   => null,
-                        'originalReferenceNumber'       => null,
-                        'delayReason'                   => null,
-                        'claimNote'                     => null,
-                        'codeClaimNote'                 => null,
-                        'lineNote'                      => null,
-                        'codeLineNote'                  => null,
-                        'reportType'                    => null,
-                        'reportTransmission'            => null,
-                        'attachmentControlNumber'       => null,
-                        'medicaidServicesEP'            => false,
-                        'referralGiven'                 => false,
-                        'condition1'                    => null,
-                        'condition2'                    => null,
-                        'condition2'                    => null,
+                        'conditionOriginatedDate'       => $extraData[1][1],
+                        'firstConsultedDate'            => $extraData[1][2],
+                        'lastSeenDate'                  => $extraData[1][2],
+                        'acuteManifestationDate'        => $extraData[1][4],
+                        'lastXRayDate'                  => $extraData[1][5],
+                        'illnessAccidentPregnancy'      => $extraData[1][6],
+                        'autoAccidentState'             => $extraData[1][7],
+                        'accidentDate'                  => $extraData[1][8],
+                        'employmentRelated'             => (empty($extraData[1][9]) || $extraData[1][9] == 'off') ? false : true,
+                        'mammographyCertificateNumber'  => $extraData[2][1],
+                        'claimReason'                   => $extraData[2][2],
+                        'originalReferenceNumber'       => $extraData[2][3],
+                        'delayReason'                   => $extraData[2][4],
+                        'claimNote'                     => $extraData[2][5],
+                        'codeClaimNote'                 => $extraData[2][6],
+                        'lineNote'                      => $extraData[2][7],
+                        'codeLineNote'                  => $extraData[2][8],
+                        'reportType'                    => $extraData[2][9],
+                        'reportTransmission'            => $extraData[2][10],
+                        'attachmentControlNumber'       => $extraData[2][11],
+                        'medicaidServicesEP'            => (empty($extraData[2][13]) || $extraData[2][13] == 'off') ? false : true,
+                        'referralGiven'                 => (empty($extraData[2][14]) || $extraData[2][14] == 'off') ? false : true,
+                        'condition1'                    => $extraData[2][15],
+                        'condition2'                    => $extraData[2][16],
+                        'condition3'                    => $extraData[2][17],
+                        'accessionNumberLabLevel'       => $extraData[3][1],
+                        'salesRepresentative'           => $extraData[3][2],
+                        'locationCode'                  => $extraData[3][3],
+                        'locationName'                  => $extraData[3][4],
+                        'labUserDefined'                => $extraData[3][5],
+                        'referenceLab'                  => $extraData[3][6],
+                        'panelName'                     => $extraData[3][7],
+                        'labTestType'                   => $extraData[3][8],
                     ]);
 
                 foreach ($chargesData as $chargesInfo) {

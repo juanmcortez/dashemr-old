@@ -38,7 +38,7 @@ return new class extends Migration
 
             $table->longText('consult')->nullable();
             $table->unsignedBigInteger('authorizationNumberID')->nullable();
-
+            // Problem Tab
             $table->dateTime('conditionOriginatedDate')->nullable();
             $table->dateTime('firstConsultedDate')->nullable();
             $table->dateTime('lastSeenDate')->nullable();
@@ -48,23 +48,32 @@ return new class extends Migration
             $table->string('autoAccidentState', 64)->nullable();
             $table->dateTime('accidentDate')->nullable();
             $table->boolean('employmentRelated')->default(false);
-
+            // Miscellaneous Tab
             $table->string('mammographyCertificateNumber', 64)->nullable();
-            $table->enum('claimReason', ['Original', 'Adjustment', 'Void', ''])->nullable();
+            $table->enum('claimReason', ['OriginalClaim', 'AdjustmentReplacementPreviousClaim', 'VoidCancelPreviousClaim', ''])->nullable();
             $table->string('originalReferenceNumber', 64)->nullable();
-            $table->enum('delayReason', ['Authorization', 'Delay', 'Litigation', ''])->nullable();
-            $table->enum('claimNote', ['Additional', 'Block', 'Certificate', ''])->nullable();
+            $table->enum('delayReason', ['AuthorizationDelays', 'DelayCertifyingProvider', 'DelayCustomMadeAppliances', 'DelayEligibilityDetermination', 'DelayPriorApproval', 'DelaySupplyingBillingForms', 'Litigation', 'OriginalDeniedNotBillingLimit', 'Other', 'ProofEligibilityUnavailable', ''])->nullable();
+            $table->enum('claimNote', ['AdditionalInformation', 'Block19PaperClaim', 'CertificationNarrative', 'DiagnosisDescription', 'GoalPlans', 'Payment', 'ThirdPartyOrganization', ''])->nullable();
             $table->string('codeClaimNote', 64)->nullable();
-            $table->enum('lineNote', ['Additional', 'Goal', 'Payment', ''])->nullable();
+            $table->enum('lineNote', ['AdditionalInformation', 'GoalPlans', 'Payment', 'ThirdPartyOrganizationNot', ''])->nullable();
             $table->string('codeLineNote', 64)->nullable();
-            $table->enum('reportType', ['Admission', 'Dental', 'Discharge', ''])->nullable();
-            $table->enum('reportTransmission', ['Available', 'Fax', 'Mail', ''])->nullable();
+            $table->enum('reportType', ['AdmissionSummary', 'Certification', 'DentalModels', 'DiagnosticReport', 'DischargeSummary', ''])->nullable();
+            $table->enum('reportTransmission', ['AvailableProviderSite', 'ByFax', 'ByMail', 'ElectronicOnly', 'Email', ''])->nullable();
             $table->string('attachmentControlNumber', 64)->nullable();
             $table->boolean('medicaidServicesEP')->default(false);
             $table->boolean('referralGiven')->default(false);
-            $table->enum('condition1', ['New', 'NotUsed', 'Patient', 'UnderTreatment', ''])->nullable();
-            $table->enum('condition2', ['New', 'NotUsed', 'Patient', 'UnderTreatment', ''])->nullable();
-            $table->enum('condition3', ['New', 'NotUsed', 'Patient', 'UnderTreatment', ''])->nullable();
+            $table->enum('condition1', ['NewServicesRequested', 'NotUsed', 'PatientRefusedReferral', 'UnderTreatment', ''])->nullable();
+            $table->enum('condition2', ['NewServicesRequested', 'NotUsed', 'PatientRefusedReferral', 'UnderTreatment', ''])->nullable();
+            $table->enum('condition3', ['NewServicesRequested', 'NotUsed', 'PatientRefusedReferral', 'UnderTreatment', ''])->nullable();
+            // Labs Tab
+            $table->string('accessionNumberLabLevel', 64)->nullable();
+            $table->string('salesRepresentative', 64)->nullable();
+            $table->string('locationCode', 64)->nullable();
+            $table->string('locationName', 64)->nullable();
+            $table->string('labUserDefined', 64)->nullable();
+            $table->string('referenceLab', 64)->nullable();
+            $table->string('panelName', 64)->nullable();
+            $table->string('labTestType', 64)->nullable();
 
             $table->softDeletes();
         });
