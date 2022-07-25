@@ -15,15 +15,17 @@
                 <th>&nbsp;</th>
                 <th align="left">Name</th>
                 <th>&nbsp;</th>
-                <th align="center">Age</th>
-                <th>&nbsp;</th>
                 <th align="center">Phone</th>
                 <th>&nbsp;</th>
-                <th align="center">S.S.N.</th>
+                <th align="center">SSN</th>
                 <th>&nbsp;</th>
-                <th align="center">PID</th>
+                <th align="center">Date of Birth</th>
+                <th>&nbsp;</th>
+                <th align="center">Accession #</th>
                 <th>&nbsp;</th>
                 <th align="center">External PID</th>
+                <th>&nbsp;</th>
+                <th align="center">PID</th>
                 <th>&nbsp;</th>
                 <th align="center">Last Srv Date</th>
                 <th>&nbsp;</th>
@@ -37,28 +39,30 @@
                 <td>&nbsp;</td>
                 <td>{{ $patient->full_name }}</td>
                 <td>&nbsp;</td>
-                <td align="center">{{ $patient->age }}</td>
-                <td>&nbsp;</td>
                 <td align="center">{{ $patient->homePhone }}</td>
                 <td>&nbsp;</td>
                 <td align="center">{{ $patient->socialSecurityNumber }}</td>
                 <td>&nbsp;</td>
-                <td align="center">{{ $patient->patientInfo->pid }}</td>
+                <td align="center">{{ $patient->dateOfBirth->format('M d, Y') }}</td>
+                <td>&nbsp;</td>
+                <td align="center"> -- </td>
                 <td>&nbsp;</td>
                 <td align="center">{{ $patient->patientInfo->externalPid }}</td>
                 <td>&nbsp;</td>
+                <td align="center">{{ $patient->patientInfo->pid }}</td>
+                <td>&nbsp;</td>
                 <td align="center">{{ $patient->patientInfo->lastServiceDate() }}</td>
                 <td>&nbsp;</td>
-                <th align="center">
+                <td align="center">
                     <a href="{{ route('patients.show', ['patient' => $patient->patientInfo->pid]) }}">View</a>
-                </th>
+                </td>
                 <th>&nbsp;</th>
             </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="15">{{ $patients->links() }}</td>
+                <td colspan="18">{{ $patients->links() }}</td>
             </tr>
         </tfoot>
     </table>

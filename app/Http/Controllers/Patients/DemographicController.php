@@ -19,7 +19,7 @@ class DemographicController extends Controller
         $patients = Demographic::orderBy('lastName')
             ->orderBy('firstName')
             ->orderBy('middleName')
-            ->paginate(15);
+            ->paginate(100);
         return view('patients.index', compact('patients'));
     }
 
