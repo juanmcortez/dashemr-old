@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Invoices;
 
-use App\Models\Patients\Patient;
-use App\Models\Invoices\Encounter;
+use App\Models\Invoices\Charge;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Invoices\StoreEncounterRequest;
-use App\Http\Requests\Invoices\UpdateEncounterRequest;
+use App\Http\Requests\StoreChargeRequest;
+use App\Http\Requests\UpdateChargeRequest;
 
-class EncounterController extends Controller
+class ChargeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,10 +32,10 @@ class EncounterController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Invoices\StoreEncounterRequest  $request
+     * @param  \App\Http\Requests\StoreChargeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEncounterRequest $request)
+    public function store(StoreChargeRequest $request)
     {
         //
     }
@@ -44,22 +43,21 @@ class EncounterController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patients\Patient  $patient
-     * @param  \App\Models\Invoices\Encounter  $encounter
+     * @param  \App\Models\Invoices\Charge  $charge
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient, Encounter $encounter)
+    public function show(Charge $charge)
     {
-        return view('encounters.show', compact('encounter'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Invoices\Encounter  $encounter
+     * @param  \App\Models\Invoices\Charge  $charge
      * @return \Illuminate\Http\Response
      */
-    public function edit(Encounter $encounter)
+    public function edit(Charge $charge)
     {
         //
     }
@@ -67,11 +65,11 @@ class EncounterController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Invoices\UpdateEncounterRequest  $request
-     * @param  \App\Models\Invoices\Encounter  $encounter
+     * @param  \App\Http\Requests\UpdateChargeRequest  $request
+     * @param  \App\Models\Invoices\Charge  $charge
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEncounterRequest $request, Encounter $encounter)
+    public function update(UpdateChargeRequest $request, Charge $charge)
     {
         //
     }
@@ -79,10 +77,10 @@ class EncounterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Invoices\Encounter  $encounter
+     * @param  \App\Models\Invoices\Charge  $charge
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Encounter $encounter)
+    public function destroy(Charge $charge)
     {
         //
     }

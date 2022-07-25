@@ -2,6 +2,7 @@
 
 namespace App\Models\Invoices;
 
+use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,6 +38,52 @@ class Encounter extends Model
         'pid',
         'entryDate',
         'serviceDate',
+        'serviceDateTo',
+        'facilityID',
+        'billingFacilityID',
+        'placeOfServiceID',
+        'sensitivity',
+        'admisionDate',
+        'dischargeDate',
+        'renderingProviderID',
+        'referringProviderID',
+        'orderingProviderID',
+        'supervisingProviderID',
+        'consult',
+        'authorizationNumberID',
+        'conditionOriginatedDate',
+        'firstConsultedDate',
+        'lastSeenDate',
+        'acuteManifestationDate',
+        'lastXRayDate',
+        'illnessAccidentPregnancy',
+        'autoAccidentState',
+        'accidentDate',
+        'employmentRelated',
+        'mammographyCertificateNumber',
+        'claimReason',
+        'originalReferenceNumber',
+        'delayReason',
+        'claimNote',
+        'codeClaimNote',
+        'lineNote',
+        'codeLineNote',
+        'reportType',
+        'reportTransmission',
+        'attachmentControlNumber',
+        'medicaidServicesEP',
+        'referralGiven',
+        'condition1',
+        'condition2',
+        'condition3',
+        'accessionNumberLabLevel',
+        'salesRepresentative',
+        'locationCode',
+        'locationName',
+        'labUserDefined',
+        'referenceLab',
+        'panelName',
+        'labTestType'
     ];
 
 
@@ -58,8 +105,20 @@ class Encounter extends Model
      * @var array
      */
     protected $casts = [
-        'entryDate'    => 'datetime:M d, Y',
-        'serviceDate'  => 'datetime:M d, Y'
+        'entryDate'                 => 'datetime:M d, Y',
+        'serviceDate'               => 'datetime:M d, Y',
+        'serviceDateTo'             => 'datetime:M d, Y',
+        'admisionDate'              => 'datetime:M d, Y',
+        'dischargeDate'             => 'datetime:M d, Y',
+        'conditionOriginatedDate'   => 'datetime:M d, Y',
+        'firstConsultedDate'        => 'datetime:M d, Y',
+        'lastSeenDate'              => 'datetime:M d, Y',
+        'acuteManifestationDate'    => 'datetime:M d, Y',
+        'lastXRayDate'              => 'datetime:M d, Y',
+        'accidentDate'              => 'datetime:M d, Y',
+        'employmentRelated'         => 'boolean',
+        'medicaidServicesEP'        => 'boolean',
+        'referralGiven'             => 'boolean',
     ];
 
 
@@ -71,5 +130,23 @@ class Encounter extends Model
     public function patientInfo()
     {
         return $this->belongsTo(Patient::class, 'pid', 'pid');
+    }
+
+
+    /**
+     * Get charges information associated to encounter
+     *
+     * @return void
+     */
+    public function chargesList()
+    {
+        return $this->hasMany(Charge::class, 'encounter', 'encounter');
+    }
+
+
+
+    public function getTotalChargesAttribute()
+    {
+        return count($this->chargesList);
     }
 }

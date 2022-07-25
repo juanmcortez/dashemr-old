@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Patients\PatientController;
+use App\Http\Controllers\Invoices\EncounterController;
 use App\Http\Controllers\Patients\DemographicController;
 
 /*
@@ -16,4 +17,5 @@ use App\Http\Controllers\Patients\DemographicController;
 */
 
 Route::get('/', [DemographicController::class, 'index']);
-Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
+Route::get('/patient-{patient}/ledger', [PatientController::class, 'show'])->name('patients.show');
+Route::get('/patient-{patient}/encounter-{encounter}/detail', [EncounterController::class, 'show'])->name('encounter.show');
