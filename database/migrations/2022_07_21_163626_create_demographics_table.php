@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('demographics', function (Blueprint $table) {
             $table->id('pid');
+            $table->foreign('pid')->references('pid')->on('patients');
 
             $table->enum('title', ['unassigned', 'mr', 'mrs', 'ms', 'dr', 'other'])->default('unassigned');
 
