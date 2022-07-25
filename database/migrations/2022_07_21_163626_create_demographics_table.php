@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('pid');
             $table->foreign('pid')->references('pid')->on('patients');
 
-            $table->enum('title', ['unassigned', 'mr', 'mrs', 'ms', 'dr', 'other'])->default('unassigned');
+            $table->enum('title', ['unassigned', 'mr', 'mrs', 'ms', 'dr', 'other', ''])->nullable();
 
             $table->string('firstName')->default('N');
             $table->string('middleName')->nullable();
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('cellPhone')->nullable();
             $table->string('emailAddress')->nullable();
 
-            $table->enum('civilStatus', ['unassigned', 'single', 'married', 'divorced', 'widowed', 'separated', 'domesticPartner', 'other'])->default('unassigned');
+            $table->enum('civilStatus', ['unassigned', 'single', 'married', 'divorced', 'widowed', 'separated', 'domesticPartner', 'other', ''])->nullable();;
 
             $table->string('language')->default('en');
             $table->string('ethnicity')->default('unassigned');
