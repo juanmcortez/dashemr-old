@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.dashemr')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
-</head>
+@section('title', 'Patient\'s List')
 
-<body class="antialiased">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+@section('content')
+<div class="overflow-x-auto">
+    <table class="table table-compact w-full">
         <thead>
             <tr>
                 <th>&nbsp;</th>
@@ -54,7 +49,17 @@
                 <td align="center">{{ $patient->patientInfo->lastServiceDate() }}</td>
                 <td>&nbsp;</td>
                 <td align="center">
-                    <a href="{{ route('patients.show', ['patient' => $patient->patientInfo->pid]) }}">View</a>
+                    <a class="link link-hover" title="View"
+                        href="{{ route('patients.show', ['patient' => $patient->patientInfo->pid]) }}">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </a>
                 </td>
                 <th>&nbsp;</th>
             </tr>
@@ -66,6 +71,8 @@
             </tr>
         </tfoot>
     </table>
-</body>
+</div>
+@endsection
 
-</html>
+@push('scripts')
+@endpush

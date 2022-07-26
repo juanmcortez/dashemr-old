@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.dashemr')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
-</head>
+@section('title', 'Patient\'s Detail')
 
-<body class="antialiased">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+@section('content')
+<div class="overflow-x-auto">
+    <table class="table table-compact w-full">
         <tbody>
             <tr>
                 <td>{{ $encounter->serviceDate->format('M d, Y') }}</td>
@@ -19,7 +14,7 @@
             </tr>
             <tr>
                 <td colspan="2" rowspan="3">
-                    <textarea>{{ $encounter->consult }}</textarea>
+                    <textarea class="textarea" placeholder="Consultation">{{ $encounter->consult }}</textarea>
                 </td>
                 <td>{{ $encounter->placeOfServiceID }}</td>
                 <td>{{ $encounter->sensitivity }}</td>
@@ -42,7 +37,7 @@
 
     <hr />
 
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table class="table table-compact w-full">
         <tbody>
             @foreach($encounter->chargesList as $charge)
             <tr>
@@ -71,6 +66,8 @@
             @endforeach
         </tbody>
     </table>
-</body>
+</div>
+@endsection
 
-</html>
+@push('scripts')
+@endpush
