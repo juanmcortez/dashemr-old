@@ -49,6 +49,31 @@
             <td colspan="2">{{ $charge->modifier }}</td>
             <td colspan="3">{{ $charge->noteCodes }}</td>
         </tr>
+        @if($charge->codeType == 'HCPCS')
+        <tr>
+            <td colspan="3">{{ $charge->NDCvalue }}</td>
+            <td>{{ $charge->NDCquantity }}</td>
+            <td>{{ $charge->NDCtype }}</td>
+        </tr>
+        @elseif($charge->codeType == 'ANES' || $charge->codeType == 'CVX')
+        <tr>
+            <td>{{ $charge->anesthesiaStartTime }}</td>
+            <td>{{ $charge->anesthesiaStopTime }}</td>
+            <td>{{ $charge->anesthesiaLapseTime }}</td>
+            <td>{{ $charge->anesthesiaTimeUnits }}</td>
+            <td>{{ $charge->anesthesiaBaseUnits }}</td>
+        </tr>
+        <tr>
+            <td>{{ $charge->anesthesiaUnitCharge }}</td>
+            <td>{{ $charge->anesthesiaM1 }}</td>
+            <td>{{ $charge->anesthesiaM2 }}</td>
+            <td>{{ $charge->anesthesiaInfusion }}</td>
+            <td>{{ $charge->anesthesiaBasicValue }}</td>
+        </tr>
+        <tr>
+            <td colspan="5">{{ $charge->anesthesiaModifierUnits }}</td>
+        </tr>
+        @endif
         <tr>
             <td>{{ $charge->custom1 }}</td>
             <td>{{ $charge->custom2 }}</td>
