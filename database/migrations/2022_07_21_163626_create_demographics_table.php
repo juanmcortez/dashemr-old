@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('pid');
             $table->foreign('pid')->references('pid')->on('patients');
 
-            $table->enum('title', ['unassigned', 'mr', 'mrs', 'ms', 'dr', 'other', ''])->nullable();
+            $table->enum('title', ['unassigned', 'mr', 'mrs', 'Mrs.', 'ms', 'dr', 'other', ''])->nullable();
 
             $table->string('firstName')->default('N');
             $table->string('middleName')->nullable();

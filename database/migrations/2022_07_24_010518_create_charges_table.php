@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('encounter');
             $table->foreign('encounter')->references('encounter')->on('encounters');
 
-            $table->enum('codeType', ['CPT4', 'HCPCS', 'ANES', 'CVX'])->default('CPT4');
+            $table->enum('codeType', ['CPT4', 'HCPCS', 'ANES', 'CVX', ''])->default('CPT4')->nullable();
             $table->string('code', 8)->default('99213');
             $table->string('codeText', 128)->nullable();
 
@@ -28,9 +28,9 @@ return new class extends Migration
             $table->integer('units')->default(1);
 
             $table->string('modifier', 64)->nullable();
-            $table->string('ICDitems', 128)->nullable();
+            $table->text('ICDitems')->nullable();
 
-            $table->string('NDCvalue', 13)->nullable();
+            $table->string('NDCvalue', 32)->nullable();
             $table->integer('NDCquantity')->nullable();
             $table->enum('NDCtype', ['ML', 'Grams', 'Miligrams', 'I.U.', 'Units'])->default('ML');
 

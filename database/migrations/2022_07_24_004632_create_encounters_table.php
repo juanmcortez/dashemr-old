@@ -50,10 +50,10 @@ return new class extends Migration
             $table->boolean('employmentRelated')->default(false);
             // Miscellaneous Tab
             $table->string('mammographyCertificateNumber', 64)->nullable();
-            $table->enum('claimReason', ['OriginalClaim', 'AdjustmentReplacementPreviousClaim', 'VoidCancelPreviousClaim', ''])->nullable();
+            $table->string('claimReason', 64)->nullable();
             $table->string('originalReferenceNumber', 64)->nullable();
             $table->enum('delayReason', ['AuthorizationDelays', 'DelayCertifyingProvider', 'DelayCustomMadeAppliances', 'DelayEligibilityDetermination', 'DelayPriorApproval', 'DelaySupplyingBillingForms', 'Litigation', 'OriginalDeniedNotBillingLimit', 'Other', 'ProofEligibilityUnavailable', ''])->nullable();
-            $table->enum('claimNote', ['AdditionalInformation', 'Block19PaperClaim', 'CertificationNarrative', 'DiagnosisDescription', 'GoalPlans', 'Payment', 'ThirdPartyOrganization', ''])->nullable();
+            $table->string('claimNote', 64)->nullable();
             $table->string('codeClaimNote', 64)->nullable();
             $table->enum('lineNote', ['AdditionalInformation', 'GoalPlans', 'Payment', 'ThirdPartyOrganizationNot', ''])->nullable();
             $table->string('codeLineNote', 64)->nullable();
