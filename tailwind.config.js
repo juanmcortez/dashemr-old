@@ -1,12 +1,25 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
+    mode: 'jit',
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['Amiko', ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+    variants: {
+        extend: {
+            opacity: ['disabled'],
+            backgroundColor: ['active'],
+        },
     },
     plugins: [
         require("@tailwindcss/typography"),
@@ -16,8 +29,6 @@ module.exports = {
     daisyui: {
         logs: false,
         prefix: "dashemr",
-        themes: [
-            "night"
-        ],
+        themes: [],
     },
 }

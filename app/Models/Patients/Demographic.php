@@ -2,6 +2,7 @@
 
 namespace App\Models\Patients;
 
+use Illuminate\Support\Str;
 use App\Models\Patients\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -119,9 +120,9 @@ class Demographic extends Model
     public function getFullNameAttribute()
     {
         if ($this->middleName) {
-            return $this->lastName . ', ' . $this->firstName . ' ' . $this->middleName;
+            return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName)) . ' ' . Str::ucfirst(Str::lower($this->middleName));
         } else {
-            return $this->lastName . ', ' . $this->firstName;
+            return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName));
         }
     }
 
