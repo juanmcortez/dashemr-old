@@ -7,7 +7,6 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/dashemr.scss',
                 'resources/js/dashemr.js',
             ],
             refresh: true,
