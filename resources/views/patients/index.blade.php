@@ -48,8 +48,7 @@
             <td align="center">{{ $patient->patientInfo->lastServiceDate() }}</td>
             <td>&nbsp;</td>
             <td align="center">
-                <a class="link link-hover" title="View"
-                    href="{{ route('patients.show', ['patient' => $patient->patientInfo->pid]) }}">
+                <a class="link link-hover" title="View" href="{{ route('patients.show', ['patient' => $patient]) }}">
                     <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

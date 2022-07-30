@@ -71,7 +71,7 @@
             </td>
             <td>
                 <a class="link link-hover" title="View"
-                    href="{{ route('encounter.show', ['patient' => $patient->pid, 'encounter' => $invoice->encounter]) }}">
+                    href="{{ route('encounter.show', ['patient' => $patient, 'encounter' => $invoice]) }}">
                     <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

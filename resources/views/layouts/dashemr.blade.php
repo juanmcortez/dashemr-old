@@ -14,7 +14,7 @@
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
 
-    @vite('resources/css/dashemr.scss')
+    @vite(['resources/css/dashemr.scss', 'resources/js/dashemr.js'])
 </head>
 
 <body class="font-sans leading-normal tracking-normal bg-gray-200">
@@ -55,7 +55,6 @@
         </main>
     </div>
 
-    @vite('resources/js/dashemr.js')
     @stack('scripts')
 </body>
 
