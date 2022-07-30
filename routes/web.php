@@ -17,5 +17,5 @@ use App\Http\Controllers\Patients\DemographicController;
 */
 
 Route::get('/', [DemographicController::class, 'index']);
-Route::get('/patient-{patient}/ledger', [PatientController::class, 'show'])->name('patients.show');
-Route::get('/patient-{patient}/encounter-{encounter}/detail', [EncounterController::class, 'show'])->name('encounter.show');
+Route::get('/patient/{patient}/ledger', [PatientController::class, 'show'])->name('patients.show');
+Route::get('/patient/{patient}/encounter/{encounter}/detail', [EncounterController::class, 'show'])->name('encounter.show');
